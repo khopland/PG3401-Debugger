@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "pgdbglog.h"
 
-char glob_var = NULL;
+char glob_var = '1';
 
 void main(void){
-    pgdebug("test");
+    pgdebug("test %d", 1);
+    pgdebug("test %d", 2);
+    pgdebug("test %d", 2);
+    pgdebug("test %d", 2);
     pgerror("error test");
     return;
 }
