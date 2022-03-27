@@ -16,10 +16,6 @@ OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 $(OBJDIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-lib: $(OBJS)
-	ar rcs pgdbglog.a $(OBJDIR)/pgdbglog.o $(INCLDIR)/pgdbglog.h
-	ranlib pgdbglog.a
-
 test: $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS)
 

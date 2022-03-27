@@ -22,7 +22,6 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *pszFile, cons
 		sp = fopen("settings.txt", "r");
 		fscanf(sp, "%[^\n\n]", buffer);
 		glob_var = buffer[0];
-		printf("%c",glob_var);
 		fclose(sp);
 	}
 	
