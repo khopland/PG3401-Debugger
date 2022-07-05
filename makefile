@@ -1,7 +1,7 @@
 INCLDIR = ./include
 CC = gcc
 CFLAGS = -O2
-CFLAGS += -Wall -g
+CFLAGS += -Wall -g -Werror
 CFLAGS += -I$(INCLDIR)
 
 OBJDIR = obj
