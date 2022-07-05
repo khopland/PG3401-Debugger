@@ -24,16 +24,22 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *pszFile, cons
 		sp = fopen("settings.txt", "r");
 		if (sp == NULL)
 		{
+			printf("is 0");
 			glob_var = '0';
 		}
 		else
 		{
+			printf("reading from file\n");
 			int amountRes = fscanf(sp, "%[^\n\n]", buffer);
 			glob_var = (amountRes > 0) ? buffer[0] : '0';
+			printf("global var is %c\n", glob_var);
 			fclose(sp);
 		}
 		if (glob_var == '0' && ulErrorType == 0)
+		{
+			printf("skipping\n");
 			return;
+		}
 	}
 
 	va_list vaArgumentPointer;
