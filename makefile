@@ -16,8 +16,10 @@ OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 $(OBJDIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+all: test
+
 test: $(OBJS)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@  $^ $(CFLAGS)
 
 .PHONY: clean
 clean: 

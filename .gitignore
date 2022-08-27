@@ -2,3 +2,4 @@ test
 obj/
 debug_*
 *.a
+.idea
