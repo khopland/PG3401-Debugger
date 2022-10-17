@@ -6,19 +6,19 @@ CFLAGS += -I$(INCLDIR)
 
 OBJDIR = obj
 
-_DEPS = pgdbglog.h
+_DEPS = debugger.h
 DEPS = $(patsubst %,$(INCLDIR)/%,$(_DEPS))
 
-_OBJS = main.o pgdbglog.o
+_OBJS = main.o debugger.o
 OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: test
+all: main
 
-test: $(OBJS)
+main: $(OBJS)
 	$(CC) -o $@  $^ $(CFLAGS)
 
 .PHONY: clean
