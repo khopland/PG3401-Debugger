@@ -2,6 +2,7 @@
 *.d
 debug_*
 main
+.idea
 # Object files
 *.o
 *.ko
