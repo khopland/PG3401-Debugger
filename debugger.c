@@ -1,13 +1,13 @@
 /**
  * @date:   2022-10-17 14:06:43
- * @lastModifiedTime: 2022-10-24 15:35:45
+ * @lastModifiedTime: 2022-10-31 19:58:02
  * @License: Apache License 2.0, https://www.apache.org/licenses/LICENSE-2.0
  */
 
+#include <pthread.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <time.h>
-#include <pthread.h>
 
 #define _LENGTH_ 256
 char glob_var = '1';
@@ -16,7 +16,6 @@ void debugLogger(unsigned long ulErrorType, int iLine, const char *pszFile, cons
 
     // need a mutex to increment call counter correct, and not open multiple files
     static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_mutex_lock(&mutex);
 
     // needs to be static to keep the value between calls.
     static FILE *fp = NULL, *sp;
@@ -31,6 +30,7 @@ void debugLogger(unsigned long ulErrorType, int iLine, const char *pszFile, cons
     char szOutputString[_LENGTH_] = {0};
     char *pszType = NULL;
 
+    pthread_mutex_lock(&mutex);
     // creates log file if its not created yet.
     if (fp == NULL) {
         tTimeAndDate = time(NULL) - 1601399931;
@@ -60,6 +60,7 @@ void debugLogger(unsigned long ulErrorType, int iLine, const char *pszFile, cons
     va_end(vaArgumentPointer);
 
     // write to file the log statement.
-    fprintf(fp, "%04i: %s: %s, at %s:%i\n", iCallCounter++, pszType, szOutputString, pszFile, iLine);
+    fprintf(fp, "%04i: %s: %s, at %s:%i on thread:%ld \n", iCallCounter++, pszType, szOutputString, pszFile, iLine, pthread_self());
+    fflush(fp);
     pthread_mutex_unlock(&mutex);
 }
